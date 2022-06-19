@@ -20,7 +20,7 @@ export const InputForm: Component<InputFormProps> = (props) => {
           type="text"
           disabled={props.isDisabled}
           value={prompt()}
-          onChange={(e) => setPrompt(e.currentTarget.value)}
+          onInput={(e) => setPrompt(e.currentTarget.value)}
           onKeyDown={(e) => e.key === "Enter" && handleClick()}
           class="w-full rounded-md p-3 text-xl dark:bg-slate-800 ring-1 ring-slate-700 focus:outline-none disabled:text-gray-500 disabled:cursor-default"
         />
