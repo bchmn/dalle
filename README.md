@@ -1,4 +1,4 @@
-# Dalle-E 
+# DALL-E 
 
 ## Server
 1. `chmod +x bootstrap.sh`
