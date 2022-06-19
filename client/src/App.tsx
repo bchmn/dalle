@@ -60,6 +60,8 @@ const App: Component = () => {
       </div>
       <div class="flex flex-1 flex-col w-8/12 gap-6">
         <InputForm
+          // @ts-expect-error inputRef is assigned by solidjs
+          ref={inputRef}
           isDisabled={isDisabled()}
           handleGenerateClick={handleGenerateClick}
         />
