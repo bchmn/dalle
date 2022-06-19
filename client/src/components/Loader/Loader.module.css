@@ -1,0 +1,44 @@
+.loader {
+  width: 256px;
+  height: 256px;
+  position: relative;
+  background: rgb(254 215 170);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.loader:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 172px;
+  height: 160px;
+  transform: rotate(45deg) translate(30%, 40%);
+  background: rgb(249 115 22);
+  box-shadow: 32px -34px 0 5px rgb(234 88 22);
+  animation: slide 3s infinite ease-in-out alternate;
+}
+.loader:after {
+  content: "";
+  position: absolute;
+  left: 90px;
+  top: 30px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ff3d00;
+  transform: rotate(0deg);
+  transform-origin: 70px 290px;
+  animation: rotate 3s infinite ease-in-out;
+}
+
+@keyframes slide {
+  0% , 100%{ bottom: -140px}
+  25% , 75%{ bottom: -8px}
+  20% , 80%{ bottom: 8px}
+}
+@keyframes rotate {
+  0% { transform: rotate(-35deg)}
+  33% , 66%{ transform: rotate(0deg)}
+  100% {  transform: rotate(50deg)}
+}

@@ -1,0 +1,10 @@
+# Server
+pip-log.txt
+pip-delete-this-directory.txt
+instance/
+.webassets-cache
+.venv
+
+# Client
+node_modules
+dist
