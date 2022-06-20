@@ -58,7 +58,7 @@ const App: Component = () => {
           backendUrl={backendUrl}
         />
       </div>
-      <div class="flex flex-1 flex-col w-8/12 gap-6">
+      <div class="flex flex-col w-8/12 gap-14">
         <InputForm
           // @ts-expect-error inputRef is assigned by solidjs
           ref={inputRef}

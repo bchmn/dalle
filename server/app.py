@@ -46,7 +46,7 @@ def generate_images_api():
         img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
         generated_images.append(img_str)
 
-    print(f"Created {num_images} images from text prompt [{text_prompt}]")
+    app.logger.info('Created {} images from text prompt [{}]'.format(num_images, text_prompt))
     return jsonify(generated_images)
 
 
