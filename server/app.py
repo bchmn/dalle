@@ -33,20 +33,20 @@ def generate_images_api():
     generated_imgs = dalle_model.generate_images(text_prompt, num_images)
 
     generated_images = []
-    # if args.save_to_disk:
-    #     dir_name = os.path.join(IMAGES_OUTPUT_DIR,f"{time.strftime('%Y-%m-%d_%H:%M:%S')}_{text_prompt}")
-    #     Path(dir_name).mkdir(parents=True, exist_ok=True)
+    if args.save_to_disk:
+        dir_name = os.path.join(IMAGES_OUTPUT_DIR,f"{time.strftime('%Y-%m-%d_%H:%M:%S')}_{text_prompt}")
+        Path(dir_name).mkdir(parents=True, exist_ok=True)
 
     for idx, img in enumerate(generated_imgs):
-        # if args.save_to_disk:
-        #     img.save(os.path.join(dir_name, f'{idx}.jpeg'), format="JPEG")
+        if args.save_to_disk:
+            img.save(os.path.join(dir_name, f'{idx}.jpeg'), format="JPEG")
 
         buffered = BytesIO()
         img.save(buffered, format="JPEG")
         img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
         generated_images.append(img_str)
 
-    app.logger.info('Created {} images from text prompt [{}]'.format(num_images, text_prompt))
+    app.logger.info(f'Created {num_images} images from text prompt [{text_prompt}]')
     return jsonify(generated_images)
 
 

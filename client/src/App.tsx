@@ -3,6 +3,7 @@ import { Loader } from "./components/Loader";
 import { BackendStatus } from "./components/BackendStatus";
 import { backendHealthCheck, generateImages } from "./dalle-api";
 import { InputForm } from "./components/InputForm";
+import { toPng } from "html-to-image";
 
 const backendUrl =
   new URLSearchParams(window.location.search).get("backendUrl") ||
@@ -12,6 +13,7 @@ const numOfImages =
   new URLSearchParams(window.location.search).get("imageCount") || "3";
 
 const App: Component = () => {
+  let wrapperRef: HTMLDivElement;
   let inputRef: HTMLInputElement;
   const [isBackendLive, setIsBackendLive] = createSignal<boolean | undefined>();
   const [isGenerating, setIsGenerating] = createSignal<boolean>(false);
@@ -43,6 +45,16 @@ const App: Component = () => {
     })();
   };
 
+  const generateScreenshot = () => {
+    void (async () => {
+      const png = await toPng(wrapperRef);
+      const link = document.createElement("a");
+      link.download = `dalle.png`;
+      link.href = png;
+      link.click();
+    })();
+  };
+
   const resetForm = () => {
     setIsGenerating(true);
     setExectionTime(undefined);
@@ -58,7 +70,8 @@ const App: Component = () => {
           backendUrl={backendUrl}
         />
       </div>
-      <div class="flex flex-col w-8/12 gap-14">
+      {/* @ts-expect-error inputRef is assigned by solidjs */}
+      <div ref={wrapperRef} class="flex flex-col w-8/12 gap-14">
         <InputForm
           // @ts-expect-error inputRef is assigned by solidjs
           ref={inputRef}
@@ -85,6 +98,14 @@ const App: Component = () => {
           </span>
         )}
       </div>
+      {!isGenerating() && generatedImages().length && (
+        <button
+          class="bg-orange-500 hover:bg-orange-400 disabled:bg-slate-800 text-gray-200 disabled:text-gray-500 font-bold py-2 px-4 rounded-md focus:outline-none"
+          onClick={generateScreenshot}
+        >
+          Screenshot
+        </button>
+      )}
     </div>
   );
 };
